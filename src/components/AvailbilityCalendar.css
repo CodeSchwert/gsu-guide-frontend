@@ -2,3 +2,10 @@
 .rbc-timeslot-group {
   min-height: 30px;
 }
+.rbc-event, .rbc-day-slot .rbc-background-event {
+  background-color: #3f51b5;
+}
+
+.rbc-day-slot .rbc-event, .rbc-day-slot .rbc-background-event {
+  border: 1px solid #303d88;
+}
