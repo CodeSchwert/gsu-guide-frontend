@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import AvailabilityCalendar from './components/AvailabilityCalendar';
 
-const styles = makeStyles((theme) => ({
+const styles = makeStyles({
   root: {
     backgroundColor: '#fff',
     minHeight: '100vh'
@@ -22,7 +22,7 @@ const styles = makeStyles((theme) => ({
   subTitle: {
     padding: '15px 0'
   }
-}));
+});
 
 const App = () => {
   const classes = styles();
@@ -38,7 +38,11 @@ const App = () => {
           </Container>
         </AppBar>
         <Container className={classes.calendarContainer}>
-          <Typography variant="subtitle1" className={classes.subTitle} gutterBottom>
+          <Typography
+            variant="subtitle1"
+            className={classes.subTitle}
+            gutterBottom
+          >
             Book your teaching availability.
           </Typography>
 
@@ -47,6 +51,6 @@ const App = () => {
       </div>
     </CssBaseline>
   );
-}
+};
 
 export default App;
