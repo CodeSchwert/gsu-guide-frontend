@@ -2,10 +2,18 @@
 .rbc-timeslot-group {
   min-height: 30px;
 }
+
+/* calendar event border */
+.rbc-day-slot .rbc-event, .rbc-day-slot .rbc-background-event {
+  border: 1px solid #303d88;
+}
+
+/* calendar event */
 .rbc-event, .rbc-day-slot .rbc-background-event {
   background-color: #3f51b5;
 }
 
-.rbc-day-slot .rbc-event, .rbc-day-slot .rbc-background-event {
-  border: 1px solid #303d88;
+/* calendar event selected */
+.rbc-event.rbc-selected, .rbc-day-slot .rbc-selected.rbc-background-event {
+  background-color: #1a2e9d
 }
