@@ -1,0 +1,4 @@
+/* override the timeslot hieghts */
+.rbc-timeslot-group {
+  min-height: 30px;
+}
