@@ -4,9 +4,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // Current version of react-big-calendar generates
+  // UNSAFE_componentWillReceiveProps errors
+  // https://github.com/jquense/react-big-calendar/issues/1777#issuecomment-835275505
+  // disabling strict mode is a workaround to disbale it
+  <App />,
   document.getElementById('root')
 );
 
