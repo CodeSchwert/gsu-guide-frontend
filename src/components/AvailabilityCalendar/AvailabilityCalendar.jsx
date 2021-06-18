@@ -1,6 +1,7 @@
 import { useState, useEffect, useReducer } from 'react';
 import moment from 'moment-timezone';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
+import Alert from './Alert';
 import EventDialogue from './EventDialogue';
 import { fetchAvailability, updateAvailability } from './api';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -28,6 +29,8 @@ const reducer = (state, action) => {
 const AvailbilityCalendar = () => {
   const [events, setEvents] = useState([]);
   const [open, setOpen] = useState(false); // open dialogue box
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alert, setAlert] = useState('');
   const [selectedEvent, dispatch] = useReducer(reducer, {});
 
   const handleOpenDialogue = () => {
@@ -53,21 +56,39 @@ const AvailbilityCalendar = () => {
   };
 
   const handleTitleChange = (e) => {
-    dispatch({ type: 'updateTitle', value: e.target.value })
-  }
+    dispatch({ type: 'updateTitle', value: e.target.value });
+  };
 
   const handleSubmit = async () => {
-    await updateAvailability(selectedEvent);
+    await updateAvailability(selectedEvent, handleOpenAlert);
     handleCloseDialogue();
-    await fetchAvailability(setEvents);
+    await fetchAvailability(setEvents, handleOpenAlert);
+  };
+
+  const handleOpenAlert = (alertMessage) => {
+    setAlert(alertMessage);
+    setOpenAlert(true);
+  };
+
+  const handleCloseAlert = (e, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenAlert(false);
   };
 
   useEffect(() => {
-    fetchAvailability(setEvents);
+    fetchAvailability(setEvents, handleOpenAlert);
   }, []);
 
   return (
     <div>
+      <Alert 
+        open={openAlert}
+        alert={alert}
+        handleClose={handleCloseAlert}
+      />
+
       <EventDialogue
         open={open}
         title={selectedEvent.title}

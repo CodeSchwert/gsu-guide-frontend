@@ -61,7 +61,7 @@ const castToUTC = (event) => {
   }
 };
 
-const fetchAvailability = async (setEvents) => {
+const fetchAvailability = async (setEvents, handleOpenAlert) => {
   try {
     const response = await fetch(`${API_SERVER}/availability`);
 
@@ -75,10 +75,11 @@ const fetchAvailability = async (setEvents) => {
   } catch (e) {
     // TODO - better error handling
     console.error(e);
+    handleOpenAlert(e.message);
   }
 };
 
-const updateAvailability = async (event) => {
+const updateAvailability = async (event, handleOpenAlert) => {
   try {
     if (!event.start || !event.end) {
       throw new Error('Event missing start and/or end times.');
@@ -93,13 +94,14 @@ const updateAvailability = async (event) => {
       },
       body: JSON.stringify(castEvent)
     });
-
+  
     if (!response.ok) {
       throw new Error(`HTTP error, status = ${response.status}`);
     }
   } catch (e) {
     // TODO - better error handling
     console.error(e);
+    handleOpenAlert(e.message);
   }
 };
 
