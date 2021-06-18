@@ -17,7 +17,7 @@ const AppTitle = () => {
     <AppBar position="relative">
       <Container>
         <Typography variant="h5" component="h1" className={classes.title}>
-          Guide Availability Calendar
+          Guide Teaching Availability Calendar
         </Typography>
       </Container>
     </AppBar>
