@@ -1,3 +1,5 @@
+import moment from 'moment-timezone';
+
 /**
  * Data access module
  */
@@ -54,7 +56,8 @@ const castToUTC = (event) => {
   return {
     ...event,
     start: start.toISOString(),
-    end: end.toISOString()
+    end: end.toISOString(),
+    timezone: moment.tz.guess() // in case they move timezones since creating the record
   }
 };
 
@@ -85,7 +88,7 @@ const updateAvailability = async (event) => {
     console.log(castEvent);
 
     const response = await fetch(`${API_SERVER}/availability/${event.id}`, {
-      method: 'patch',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -96,8 +99,8 @@ const updateAvailability = async (event) => {
       throw new Error(`HTTP error, status = ${response.status}`);
     }
 
-    const eventsJSON = await response.json();
-    console.log(eventsJSON);
+    // const eventsJSON = await response.json();
+    // console.log(eventsJSON);
   } catch (e) {
     // TODO - better error handling
     console.error(e);

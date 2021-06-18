@@ -7,8 +7,6 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './AvailbilityCalendar.css';
 
 const localizer = momentLocalizer(moment);
-// const localTimezone = moment.tz.guess();
-// console.log(localTimezone);
 
 const reducer = (state, action) => {
   console.log('reducer.state', state);
@@ -64,9 +62,11 @@ const AvailbilityCalendar = () => {
     dispatch({ type: 'updateTitle', value: e.target.value })
   }
 
-  const handleSubmit = (data) => {
+  const handleSubmit = async (data) => {
     console.log('handleSubmit', data);
-    updateAvailability(selectedEvent);
+    await updateAvailability(selectedEvent);
+    handleCloseDialogue();
+    await fetchAvailability(setEvents);
   };
 
   useEffect(() => {
