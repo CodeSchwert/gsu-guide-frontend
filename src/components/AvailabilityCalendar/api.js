@@ -85,7 +85,6 @@ const updateAvailability = async (event) => {
     }
 
     const castEvent = castToUTC(event);
-    console.log(castEvent);
 
     const response = await fetch(`${API_SERVER}/availability/${event.id}`, {
       method: 'PATCH',
@@ -98,9 +97,6 @@ const updateAvailability = async (event) => {
     if (!response.ok) {
       throw new Error(`HTTP error, status = ${response.status}`);
     }
-
-    // const eventsJSON = await response.json();
-    // console.log(eventsJSON);
   } catch (e) {
     // TODO - better error handling
     console.error(e);

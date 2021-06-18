@@ -9,8 +9,6 @@ import './AvailbilityCalendar.css';
 const localizer = momentLocalizer(moment);
 
 const reducer = (state, action) => {
-  console.log('reducer.state', state);
-  console.log('reducer.action', action);
   switch (action.type) {
     case 'selectEvent':
       return action.value;
@@ -42,28 +40,23 @@ const AvailbilityCalendar = () => {
   };
 
   const handleEventSelected = (data) => {
-    console.log('handleEventSelected', data);
     dispatch({ type: 'selectEvent', value: data });
     handleOpenDialogue();
   };
 
   const handleStartChange = (time) => {
-    console.log('handleStartChange', time);
     dispatch({ type: 'updateStart', value: time });
   };
 
   const handleEndChange = (time) => {
-    console.log('handleEndChange', time);
     dispatch({ type: 'updateEnd', value: time });
   };
 
   const handleTitleChange = (e) => {
-    console.log('handleTitleChange', e);
     dispatch({ type: 'updateTitle', value: e.target.value })
   }
 
-  const handleSubmit = async (data) => {
-    console.log('handleSubmit', data);
+  const handleSubmit = async () => {
     await updateAvailability(selectedEvent);
     handleCloseDialogue();
     await fetchAvailability(setEvents);
