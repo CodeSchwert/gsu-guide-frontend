@@ -2,7 +2,7 @@ import { useState, useEffect, useReducer } from 'react';
 import moment from 'moment-timezone';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import EventDialogue from './EventDialogue';
-import { fetchAvailability } from './api';
+import { fetchAvailability, updateAvailability } from './api';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './AvailbilityCalendar.css';
 
@@ -64,9 +64,10 @@ const AvailbilityCalendar = () => {
     dispatch({ type: 'updateTitle', value: e.target.value })
   }
 
-  const handleSubmitUpdate = () => {};
-
-  const handleSubmitNew = () => {};
+  const handleSubmit = (data) => {
+    console.log('handleSubmit', data);
+    updateAvailability(selectedEvent);
+  };
 
   useEffect(() => {
     fetchAvailability(setEvents);
@@ -83,9 +84,7 @@ const AvailbilityCalendar = () => {
         handleEndChange={handleEndChange}
         handleTitleChange={handleTitleChange}
         handleClose={handleCloseDialogue}
-        handleSubmit={(data) => {
-          console.log(data);
-        }}
+        handleSubmit={handleSubmit}
       />
 
       <Calendar
