@@ -79,7 +79,7 @@ const EventDialogue = ({
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleSubmit} color="primary">
           Submit
         </Button>
       </DialogActions>
