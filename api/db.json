@@ -20,6 +20,27 @@
       "start": "2021-06-15T19:30:00.000Z",
       "end": "2021-06-16T08:00:00.000Z",
       "timezone": "Pacific/Auckland"
+    },
+    {
+      "title": "How to play Magic the Gathering.",
+      "start": "2021-06-22T18:00:00.000Z",
+      "end": "2021-06-22T21:45:00.000Z",
+      "timezone": "Pacific/Auckland",
+      "id": "0PY0sh5"
+    },
+    {
+      "title": "How to play Flesh and Blood",
+      "start": "2021-06-23T19:30:00.000Z",
+      "end": "2021-06-23T23:00:00.000Z",
+      "timezone": "Pacific/Auckland",
+      "id": "SixUgQ0"
+    },
+    {
+      "title": "How to play Pokémon!!",
+      "start": "2021-06-24T19:00:00.000Z",
+      "end": "2021-06-24T22:00:00.000Z",
+      "timezone": "Pacific/Auckland",
+      "id": "YA22UWk"
     }
   ]
 }

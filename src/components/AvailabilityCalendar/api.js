@@ -44,7 +44,7 @@ const castToLocalTz = (events) => {
 };
 
 const castToUTC = (event) => {
-  const { start, end } = event;
+  const { id, title, start, end } = event;
   // check event start/end properties are date objects
   if (
     !typeof start.toISOString === 'function' ||
@@ -53,12 +53,18 @@ const castToUTC = (event) => {
     throw new Error('Event start/end properties must be Date objects.');
   }
 
-  return {
-    ...event,
+  const utcEvent = {
+    title,
     start: start.toISOString(),
     end: end.toISOString(),
-    timezone: moment.tz.guess() // in case they move timezones since creating the record
+    timezone: moment.tz.guess()
+  };
+
+  if (id) {
+    utcEvent.id = id
   }
+
+  return utcEvent;
 };
 
 const fetchAvailability = async (setEvents, handleOpenAlert) => {
@@ -73,7 +79,6 @@ const fetchAvailability = async (setEvents, handleOpenAlert) => {
     const localEvents = castToLocalTz(eventsJSON);
     setEvents(localEvents);
   } catch (e) {
-    // TODO - better error handling
     console.error(e);
     handleOpenAlert(e.message);
   }
@@ -94,15 +99,42 @@ const updateAvailability = async (event, handleOpenAlert) => {
       },
       body: JSON.stringify(castEvent)
     });
-  
+
     if (!response.ok) {
       throw new Error(`HTTP error, status = ${response.status}`);
     }
   } catch (e) {
-    // TODO - better error handling
     console.error(e);
     handleOpenAlert(e.message);
   }
 };
 
-export { fetchAvailability, updateAvailability };
+const addAvailability = async (event, handleOpenAlert) => {
+  try {
+    if (!event.start || !event.end) {
+      throw new Error('Event missing start and/or end times.');
+    }
+    if (!event.title) {
+      throw new Error('Event description missing.');
+    }
+
+    const castEvent = castToUTC(event);
+
+    const response = await fetch(`${API_SERVER}/availability`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(castEvent)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error, status = ${response.status}`);
+    }
+  } catch (e) {
+    console.error(e);
+    handleOpenAlert(e.message);
+  }
+};
+
+export { addAvailability, fetchAvailability, updateAvailability };

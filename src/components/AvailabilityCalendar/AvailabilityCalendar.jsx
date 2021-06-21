@@ -3,7 +3,7 @@ import moment from 'moment-timezone';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import Alert from './Alert';
 import EventDialogue from './EventDialogue';
-import { fetchAvailability, updateAvailability } from './api';
+import { addAvailability, fetchAvailability, updateAvailability } from './api';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './AvailbilityCalendar.css';
 
@@ -47,6 +47,11 @@ const AvailbilityCalendar = () => {
     handleOpenDialogue();
   };
 
+  const handleTimeSlotSelected = (data) => {
+    dispatch({ type: 'selectEvent', value: data });
+    handleOpenDialogue();
+  };
+
   const handleStartChange = (time) => {
     dispatch({ type: 'updateStart', value: time });
   };
@@ -60,7 +65,11 @@ const AvailbilityCalendar = () => {
   };
 
   const handleSubmit = async () => {
-    await updateAvailability(selectedEvent, handleOpenAlert);
+    if (!selectedEvent.id) {
+      await addAvailability(selectedEvent, handleOpenAlert);
+    } else {
+      await updateAvailability(selectedEvent, handleOpenAlert);
+    }
     handleCloseDialogue();
     await fetchAvailability(setEvents, handleOpenAlert);
   };
@@ -83,11 +92,7 @@ const AvailbilityCalendar = () => {
 
   return (
     <div>
-      <Alert 
-        open={openAlert}
-        alert={alert}
-        handleClose={handleCloseAlert}
-      />
+      <Alert open={openAlert} alert={alert} handleClose={handleCloseAlert} />
 
       <EventDialogue
         open={open}
@@ -107,10 +112,7 @@ const AvailbilityCalendar = () => {
         defaultView="week"
         step={30}
         selectable
-        onSelectSlot={(data) => {
-          console.log(data);
-          handleOpenDialogue();
-        }}
+        onSelectSlot={handleTimeSlotSelected}
         onSelectEvent={handleEventSelected}
       />
     </div>

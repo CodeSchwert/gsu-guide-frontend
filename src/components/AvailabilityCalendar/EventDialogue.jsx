@@ -29,6 +29,8 @@ const EventDialogue = ({
 }) => {
   const classes = styles();
 
+  const submitDisabled = !title || !start || !end ? true : false;
+
   return (
     <Dialog
       open={open}
@@ -43,11 +45,12 @@ const EventDialogue = ({
         <TextField
           margin="dense"
           id="teaching-description"
-          label="Description"
+          label="Description (required)"
           type="text"
           value={title || ''} // workaround for stuck label
           onChange={handleTitleChange}
           fullWidth
+          required
         />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardTimePicker
@@ -60,6 +63,7 @@ const EventDialogue = ({
             KeyboardButtonProps={{
               'aria-label': 'change time'
             }}
+            required
           />
           <span className={classes.spacer}></span>
           <KeyboardTimePicker
@@ -72,6 +76,7 @@ const EventDialogue = ({
             KeyboardButtonProps={{
               'aria-label': 'change time'
             }}
+            required
           />
         </MuiPickersUtilsProvider>
       </DialogContent>
@@ -79,7 +84,11 @@ const EventDialogue = ({
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleSubmit} color="primary">
+        <Button
+          onClick={handleSubmit}
+          color="primary"
+          disabled={submitDisabled}
+        >
           Submit
         </Button>
       </DialogActions>
