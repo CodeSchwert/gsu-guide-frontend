@@ -96,6 +96,7 @@ const AvailbilityCalendar = () => {
 
       <EventDialogue
         open={open}
+        eventId={selectedEvent.id}
         title={selectedEvent.title}
         start={selectedEvent.start}
         end={selectedEvent.end}
