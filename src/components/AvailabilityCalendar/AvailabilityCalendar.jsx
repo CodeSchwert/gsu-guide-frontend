@@ -48,7 +48,6 @@ const AvailbilityCalendar = () => {
   };
 
   const handleTimeSlotSelected = (data) => {
-    console.log('handleTimeSlotSelected', data);
     dispatch({ type: 'selectEvent', value: data });
     handleOpenDialogue();
   };

@@ -44,7 +44,7 @@ const castToLocalTz = (events) => {
 };
 
 const castToUTC = (event) => {
-  const { start, end } = event;
+  const { id, title, start, end } = event;
   // check event start/end properties are date objects
   if (
     !typeof start.toISOString === 'function' ||
@@ -53,12 +53,18 @@ const castToUTC = (event) => {
     throw new Error('Event start/end properties must be Date objects.');
   }
 
-  return {
-    ...event,
+  const utcEvent = {
+    title,
     start: start.toISOString(),
     end: end.toISOString(),
-    timezone: moment.tz.guess() // in case they move timezones since creating the record
+    timezone: moment.tz.guess()
   };
+
+  if (id) {
+    utcEvent.id = id
+  }
+
+  return utcEvent;
 };
 
 const fetchAvailability = async (setEvents, handleOpenAlert) => {
