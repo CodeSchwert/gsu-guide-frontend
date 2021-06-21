@@ -13,11 +13,20 @@ import {
 import { makeStyles } from '@material-ui/core';
 
 const styles = makeStyles({
-  spacer: { padding: '15px' }
+  spacer: {
+    padding: '15px'
+  },
+  hidden: {
+    visibility: 'hidden'
+  },
+  visibile: {
+    visibility: 'visible'
+  }
 });
 
 const EventDialogue = ({
   open,
+  eventId,
   title,
   start,
   end,
@@ -25,11 +34,13 @@ const EventDialogue = ({
   handleEndChange,
   handleTitleChange,
   handleClose,
-  handleSubmit
+  handleSubmit,
+  handleDelete
 }) => {
   const classes = styles();
 
   const submitDisabled = !title || !start || !end ? true : false;
+  const deleteVisible = eventId ? classes.visibile : classes.hidden;
 
   return (
     <Dialog
@@ -81,6 +92,13 @@ const EventDialogue = ({
         </MuiPickersUtilsProvider>
       </DialogContent>
       <DialogActions>
+        <Button
+          onClick={handleDelete}
+          color="secondary"
+          className={deleteVisible}
+        >
+          Delete
+        </Button>
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
