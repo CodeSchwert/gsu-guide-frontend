@@ -61,7 +61,7 @@ const castToUTC = (event) => {
   };
 
   if (id) {
-    utcEvent.id = id
+    utcEvent.id = id;
   }
 
   return utcEvent;
@@ -137,4 +137,28 @@ const addAvailability = async (event, handleOpenAlert) => {
   }
 };
 
-export { addAvailability, fetchAvailability, updateAvailability };
+const deleteAvailability = async (event, handleOpenAlert) => {
+  try {
+    if (!event.id) {
+      throw new Error('Event id missing.');
+    }
+
+    const response = await fetch(`${API_SERVER}/availability/${event.id}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error, status = ${response.status}`);
+    }
+  } catch (e) {
+    console.error(e);
+    handleOpenAlert(e.message);
+  }
+};
+
+export {
+  addAvailability,
+  fetchAvailability,
+  updateAvailability,
+  deleteAvailability
+};
