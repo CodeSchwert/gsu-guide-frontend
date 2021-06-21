@@ -3,7 +3,12 @@ import moment from 'moment-timezone';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import Alert from './Alert';
 import EventDialogue from './EventDialogue';
-import { addAvailability, fetchAvailability, updateAvailability } from './api';
+import {
+  addAvailability,
+  fetchAvailability,
+  updateAvailability,
+  deleteAvailability
+} from './api';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './AvailbilityCalendar.css';
 
@@ -74,6 +79,14 @@ const AvailbilityCalendar = () => {
     await fetchAvailability(setEvents, handleOpenAlert);
   };
 
+  const handleDelete = async () => {
+    if (selectedEvent.id) {
+      await deleteAvailability(selectedEvent, handleOpenAlert);
+    }
+    handleCloseDialogue();
+    await fetchAvailability(setEvents, handleOpenAlert);
+  };
+
   const handleOpenAlert = (alertMessage) => {
     setAlert(alertMessage);
     setOpenAlert(true);
@@ -105,6 +118,7 @@ const AvailbilityCalendar = () => {
         handleTitleChange={handleTitleChange}
         handleClose={handleCloseDialogue}
         handleSubmit={handleSubmit}
+        handleDelete={handleDelete}
       />
 
       <Calendar

@@ -34,7 +34,8 @@ const EventDialogue = ({
   handleEndChange,
   handleTitleChange,
   handleClose,
-  handleSubmit
+  handleSubmit,
+  handleDelete
 }) => {
   const classes = styles();
 
@@ -91,7 +92,11 @@ const EventDialogue = ({
         </MuiPickersUtilsProvider>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => {}} color="secondary" className={deleteVisible}>
+        <Button
+          onClick={handleDelete}
+          color="secondary"
+          className={deleteVisible}
+        >
           Delete
         </Button>
         <Button onClick={handleClose} color="primary">
