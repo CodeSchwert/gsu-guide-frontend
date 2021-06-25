@@ -8,11 +8,16 @@ Interface to allow guides to book their availability.
 
     ```zsh
     yarn install
-    yarn test --watchAll=false --verbose 
+    yarn test
     ```
 
-2. Start the local mock API server:
+2. Start an API server:
 
+    There are a couple of options here, either start a local mock API server that serves mock data, or check out this [GSU Guide Backend API](https://github.com/CodeSchwert/gsu-guide-backend) specifically designed for this React app.
+
+    If you're using the [GSU Guide Backend API](https://github.com/CodeSchwert/gsu-guide-backend), skip this step.
+
+    Otherwise, instructions are for the local mock API server:
     ```zsh
     yarn serve:api
     ```
