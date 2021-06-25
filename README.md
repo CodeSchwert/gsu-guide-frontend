@@ -4,7 +4,7 @@ Interface to allow guides to book their availability.
 
 ## Getting Started
 
-1. Install deps and test the code works:
+1. Install dependencies and test the code works:
 
     ```zsh
     yarn install
@@ -13,12 +13,13 @@ Interface to allow guides to book their availability.
 
 2. Start an API server:
 
-    There are a couple of options here, either start a local mock API server that serves mock data, or check out this [GSU Guide Backend API](https://github.com/CodeSchwert/gsu-guide-backend) specifically designed for this React app.
+    There are a couple of options here, either start a local mock API server that serves mock data or check out this [GSU Guide Backend API](https://github.com/CodeSchwert/gsu-guide-backend) specifically designed for this React app.
 
     If you're using the [GSU Guide Backend API](https://github.com/CodeSchwert/gsu-guide-backend), skip this step.
 
     Otherwise, instructions are for the local mock API server:
     ```zsh
+    # server will start on port 5000
     yarn serve:api
     ```
 
@@ -28,4 +29,4 @@ Interface to allow guides to book their availability.
     yarn start
     ```
 
-4. Open the React app your browser of choice: http://localhost:3000
+4. Open the React app in your browser of choice: http://localhost:3000
