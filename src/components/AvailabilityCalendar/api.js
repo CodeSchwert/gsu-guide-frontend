@@ -101,7 +101,14 @@ const updateAvailability = async (event, handleOpenAlert) => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error, status = ${response.status}`);
+      if (response.status === 400) {
+        const { error } = await response.json();
+        throw new Error(error);
+      }
+
+      throw new Error(
+        `HTTP ${response.status} error, status = ${response.statusText}`
+      );
     }
   } catch (e) {
     console.error(e);
@@ -129,7 +136,14 @@ const addAvailability = async (event, handleOpenAlert) => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error, status = ${response.status}`);
+      if (response.status === 400) {
+        const { error } = await response.json();
+        throw new Error(error);
+      }
+  
+      throw new Error(
+        `HTTP ${response.status} error, status = ${response.statusText}`
+      );
     }
   } catch (e) {
     console.error(e);
@@ -148,7 +162,14 @@ const deleteAvailability = async (event, handleOpenAlert) => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error, status = ${response.status}`);
+      if (response.status === 400) {
+        const { error } = await response.json();
+        throw new Error(error);
+      }
+
+      throw new Error(
+        `HTTP ${response.status} error, status = ${response.statusText}`
+      );
     }
   } catch (e) {
     console.error(e);
