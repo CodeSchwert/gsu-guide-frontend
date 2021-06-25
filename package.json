@@ -24,7 +24,7 @@
     "serve:api": "json-server --watch ./api/db.json --config ./api/json-server.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false --verbose",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
